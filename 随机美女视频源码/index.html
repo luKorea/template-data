@@ -1,0 +1,72 @@
+<!--
+ * @Author: korealu 643949593@qq.com
+ * @Date: 2022-03-29 14:03:47
+ * @LastEditors: korealu 643949593@qq.com
+ * @LastEditTime: 2022-05-07 14:01:03
+ * @FilePath: /[HTML] 开源前端 可视化大数据交互前端动态模板/随机美女视频源码/index.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="referrer" content="never" />
+    <meta name="renderer" content="webkit" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>随机观看小姐姐视频_网页在线版</title>
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <section id="main">
+      <video
+        id="player"
+        src="video.php"
+        controls=""
+        webkit-playsinline=""
+        playsinline=""
+      ></video>
+    </section>
+    <section id="buttons">
+      <button id="switch">连续: 开</button>
+      <button id="next">播放下一个</button>
+      <span id="down"><a href="https://www.abskoop.com/">我的最爱</a></span>
+    </section>
+    <script>
+      (function (window, document) {
+        if (top != self) {
+          window.top.location.replace(self.location.href);
+        }
+        var get = function (id) {
+          return document.getElementById(id);
+        };
+        var bind = function (element, event, callback) {
+          return element.addEventListener(event, callback);
+        };
+        var auto = true;
+        var player = get("player");
+        var randomm = function () {
+          player.src = "http://v.nrzj.vip/video.php?_t=" + Math.random();
+          player.play();
+        };
+        bind(get("next"), "click", randomm);
+        bind(player, "error", function () {
+          randomm();
+        });
+        bind(get("switch"), "click", function () {
+          auto = !auto;
+          this.innerText = "连续: " + (auto ? "开" : "关");
+        });
+        bind(player, "ended", function () {
+          if (auto) randomm();
+        });
+      })(window, document);
+    </script>
+  </body>
+</html>
